@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Sprites/Player/Sprites.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=5]
+resource_name = "fall"
+length = 0.23
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.22 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.9
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.28, 0.57, 0.87 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "jump"
+length = 0.6
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.38, 0.57 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.6
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.11, 0.22, 0.33, 0.44, 0.57 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6.66978, 15.0497 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 0
+script = ExtResource( 2 )
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Body"]
+position = Vector2( -0.153893, 7.23283 )
+texture = ExtResource( 1 )
+hframes = 27
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+anims/fall = SubResource( 5 )
+anims/idle = SubResource( 1 )
+anims/jump = SubResource( 2 )
+anims/run = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0.302494, 17.4574 )
+shape = SubResource( 4 )
+
+[node name="Raycasts" type="Node2D" parent="."]
+visible = false
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+position = Vector2( 4.53719, 32.1582 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 3
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+position = Vector2( -0.233382, 32.2351 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 3
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+position = Vector2( -7.00453, 32.2352 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 3
